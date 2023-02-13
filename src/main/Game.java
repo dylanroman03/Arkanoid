@@ -2,6 +2,8 @@ package main;
 
 import static managers.StatusManager.renderGoals;
 import static utilities.Constants.BACKGROUND_PATH;
+import static utilities.Constants.HEART_PATH;
+import static utilities.Constants.STAR_PATH;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -18,6 +20,8 @@ public class Game {
 	private boolean isGaming = true;
 	private boolean isPlaying = true;
 	private BufferedImage background;
+	private BufferedImage heart;
+	private BufferedImage star;
 
 	private Player player;
 	private Ball ball;
@@ -34,6 +38,8 @@ public class Game {
 
 	public Game() {
 		background = LoadSave.getImage(BACKGROUND_PATH);
+		heart = LoadSave.getImage(HEART_PATH);
+		star = LoadSave.getImage(STAR_PATH);
 		initClasses();
 
 		gamePanel = new GamePanel(this);
@@ -44,7 +50,7 @@ public class Game {
 	}
 
 	private void initClasses() {
-		int xInit = 0;
+		int xInit = (GAME_WIDTH / 2) - TILES_SIZE;
 		int yInit = GAME_HEIGHT - TILES_SIZE;
 
 		player = new Player(xInit, yInit, TILES_SIZE * 2, TILES_SIZE  / 2);
@@ -53,7 +59,7 @@ public class Game {
 		brickManager = new BrickManager();
 		brickManager.setPlayer(player);
 
-		ball = new Ball(player.getHitBox().x, player.getHitBox().y - 25);
+		ball = new Ball(player.getHitBox().x + (TILES_SIZE  - 10), player.getHitBox().y - 25);
 		ball.setGlobeManager(brickManager);
 		ball.setPlayer(player);
 	}
@@ -66,9 +72,9 @@ public class Game {
 
 	public void update() {
 		player.update(ball);
-		ball.update((int) player.getHitBox().x, (int) (player.getHitBox().y - 25));
+		ball.update((int) player.getHitBox().x + (TILES_SIZE - 10), (int) (player.getHitBox().y - 25));
 
-		if (player.getFails() == 3) {
+		if (player.getFails() == 0) {
 			isPlaying = false;	
 			callDialog(false);
 		}
@@ -84,8 +90,8 @@ public class Game {
 		brickManager.render(g);
 		player.render(g);
 		ball.render(g, (int) player.getHitBox().x, (int) (player.getHitBox().y - 25));
-		renderGoals(g, player.getGoals(), 0);
-		renderGoals(g, player.getFails(), TILES_SIZE);
+		renderGoals(g, player.getGoals(), 0, star);
+		renderGoals(g, player.getFails(), TILES_SIZE, heart);
 	}
 
 	public void run() {

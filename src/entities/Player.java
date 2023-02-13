@@ -18,7 +18,7 @@ public class Player extends Entity {
 	private boolean left, right;
 	private float playerSpeed = 1f;
 	private int goals = 0;
-	private int fails = 0;
+	private int fails = 3;
 
 	public int getFails() {
 		return fails;

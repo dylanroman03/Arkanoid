@@ -60,7 +60,7 @@ public class Ball extends Entity {
     if (isLimitBottom(hitBox.y)) {
       flying = false;
       setMovingY(-movingY);
-      player.setFails(player.getFails() + 1);
+      player.setFails(player.getFails() - 1);
     } else if (isLimitRigth(hitBox.x)) {
       setMovingX(-1);
     } else if (isLimitLeft(hitBox.x)) {

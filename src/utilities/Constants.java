@@ -43,6 +43,8 @@ public class Constants {
 	public static String PLAYER_PATH = "res/player.jpg";
 	public static String BALL_PATH = "res/ball.png";
 	public static String BACKGROUND_PATH = "res/background.png";
+	public static String HEART_PATH = "res/heart.png";
+	public static String STAR_PATH = "res/star.png";
 
 	public static String getNumberPath (int time) {
 		return "res/Time/" + time + ".png";

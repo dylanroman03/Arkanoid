@@ -9,12 +9,14 @@ import main.Game;
 import utilities.LoadSave;
 
 public class StatusManager {
-  public static void renderGoals(Graphics g, int goals, int y) {
+  public static void renderGoals(Graphics g, int goals, int y, BufferedImage icon) {
     int x =  Game.TILES_SIZE * 15;
 
     String number = String.valueOf(goals);
     char[] digits1 = number.toCharArray();
 
+
+    g.drawImage(icon, x - Game.TILES_SIZE, y, Game.TILES_SIZE / 2, Game.TILES_SIZE / 2, null);
     for (char c : digits1) {
       String path = getNumberPath(Character.getNumericValue(c));
       BufferedImage image = LoadSave.getImage(path);
