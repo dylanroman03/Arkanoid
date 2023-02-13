@@ -15,7 +15,7 @@ import entities.Player;
 import main.Game;
 
 public class BrickManager {
-  private Brick[][] globes = new Brick[4][15];
+  private Brick[][] globes = new Brick[4][20];
   private Player player;
 
   public BrickManager() {
